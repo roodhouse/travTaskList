@@ -14,6 +14,10 @@ loadEventListeners();
 // Load all event listeners (init all the functions) -- here 
 function loadEventListeners(){
     form.addEventListener('submit', addTask);
+    taskList.addEventListener('click', removeTask);
+    clearBtn.addEventListener('click', clearTasks);
+
+    // next add filter task function
 }
 
 // Get Tasks from local storage
@@ -56,6 +60,11 @@ function storeTaskInLocalStorage(task) {
 
 // Remove Task
 function removeTask(e) {
+    if(e.target.parentElement.classList.contains('delete-item')) {
+        if(confirm('Are you sure?')) {
+            e.target.parentElement.parentElement.remove();
+        }
+    }
     
 }
 
@@ -66,6 +75,12 @@ function removeTaskFromLocalStorage(taskItem) {
 
 // Clear Tasks
 function clearTasks() {
+    // taskList.innerHTML = '';
+
+    while(taskList.firstChild) {
+        taskList.removeChild(taskList.firstChild);
+    }
+
    
 }
 
